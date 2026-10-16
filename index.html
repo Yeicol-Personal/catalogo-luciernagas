@@ -1,0 +1,796 @@
+<title>Catálogo Flores Luciérnagas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Pinyon+Script&family=Playfair+Display:wght@700;800&display=swap">
+<style>
+/* Layout: portada vinotinto con la flor, tira de 5 pasos, secciones de arreglos, flores, follajes y colores, y una barra inferior con el pedido que sale por WhatsApp */
+:root {
+  --bg: #F2F0EA;
+  --surface: #FBFAF6;
+  --ink: #1D2D2B;
+  --muted: #5C6967;
+  --line: #D9D6CC;
+  --tile: #E4E1D8;
+  --wine: #5A0711;
+  --wine-ink: #FBF3E8;
+  --leaf: #26413E;
+  --leaf-ink: #FFFFFF;
+  --moss: #4A6838;
+  --wa: #12763D;
+  --wa-ink: #FFFFFF;
+  --warn: #9A3412;
+  --shadow: rgba(30, 20, 20, .22);
+  --hero: #5A0711;
+  --hero-ink: #FBF3E8;
+  --hero-muted: #E7CFCB;
+  --lime: #C9D24B;
+  --wa-hero: #2FD173;
+  --wa-hero-ink: #06240F;
+  --font-display: 'Playfair Display', 'Bodoni 72', Georgia, serif;
+  --font-script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #150E0F;
+    --surface: #221719;
+    --ink: #F2ECE3;
+    --muted: #B7AAA5;
+    --line: #3B2B2D;
+    --tile: #2D2022;
+    --wine: #E39AA3;
+    --wine-ink: #2B0910;
+    --leaf: #A9CFC4;
+    --leaf-ink: #0F2420;
+    --moss: #B9C96B;
+    --wa: #3DD27F;
+    --wa-ink: #04210F;
+    --warn: #F2A66B;
+    --shadow: rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #150E0F;
+  --surface: #221719;
+  --ink: #F2ECE3;
+  --muted: #B7AAA5;
+  --line: #3B2B2D;
+  --tile: #2D2022;
+  --wine: #E39AA3;
+  --wine-ink: #2B0910;
+  --leaf: #A9CFC4;
+  --leaf-ink: #0F2420;
+  --moss: #B9C96B;
+  --wa: #3DD27F;
+  --wa-ink: #04210F;
+  --warn: #F2A66B;
+  --shadow: rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-block: 0 7rem;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1120px; margin: 0 auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+img { display: block; }
+:focus-visible { outline: 3px solid var(--moss); outline-offset: 2px; }
+h1, h2, h3 { margin: 0; }
+
+/* Portada */
+.hero { background: var(--hero); color: var(--hero-ink); padding-top: env(safe-area-inset-top, 0px); }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 8px 24px; align-items: end; }
+.hero-copy { padding-block: 40px 36px; display: grid; gap: 14px; align-content: center; min-width: 0; }
+.mark { font-family: var(--font-script); font-size: 1.9rem; color: var(--lime); line-height: 1; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.7rem, 9.5vw, 5rem);
+  line-height: .95;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+.hero h1 span { display: block; font-family: var(--font-script); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 1.05em; margin-top: 4px; }
+.lead { margin: 0; max-width: 46ch; color: var(--hero-muted); font-size: 1.05rem; }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.btn-wa, .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn-wa { background: var(--wa-hero); color: var(--wa-hero-ink); }
+.btn-ghost { border: 1px solid var(--hero-muted); color: var(--hero-ink); }
+.btn-wa svg { width: 20px; height: 20px; }
+.hero-img { width: 100%; max-height: 560px; object-fit: contain; object-position: bottom; justify-self: end; }
+
+/* Barra de navegación */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding-block: 10px; scrollbar-width: thin; }
+.nav a {
+  flex: none;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav a:hover { border-color: var(--leaf); }
+
+/* Pasos */
+.steps-box { padding-block: 36px 8px; }
+.steps-box h2, .sh h2 { font-family: var(--font-display); font-weight: 800; color: var(--wine); line-height: 1.05; text-wrap: balance; }
+.steps-box h2 { font-size: clamp(1.7rem, 5vw, 2.3rem); }
+.script { font-family: var(--font-script); font-weight: 400; color: var(--moss); font-size: 1.7rem; line-height: 1.1; }
+ol.steps { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px 16px; }
+ol.steps li { display: grid; grid-template-columns: 40px 1fr; gap: 4px 12px; align-items: start; min-width: 0; }
+.num {
+  grid-row: span 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--leaf);
+  color: var(--leaf-ink);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+ol.steps b { font-weight: 700; line-height: 1.25; align-self: center; }
+ol.steps p { margin: 0; color: var(--muted); font-size: .9rem; }
+.note { color: var(--muted); font-size: .9rem; margin: 16px 0 0; max-width: 70ch; }
+
+/* Secciones */
+section.blk { padding-block: 44px 8px; scroll-margin-top: 70px; }
+.sh { display: grid; gap: 2px; margin-bottom: 8px; }
+.sh h2 { font-size: clamp(2rem, 6.5vw, 3rem); }
+.grid { display: grid; gap: 18px; margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+.grid.sm { grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.card.on { border-color: var(--wine); box-shadow: 0 0 0 1px var(--wine); }
+.photo { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--tile); }
+.body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+.name { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; line-height: 1.15; color: var(--ink); text-wrap: balance; overflow-wrap: anywhere; }
+.sm .name { font-size: 1.1rem; }
+.price { font-weight: 700; color: var(--wine); font-variant-numeric: tabular-nums; font-size: 1.1rem; }
+.desc { margin: 0; color: var(--muted); font-size: .92rem; }
+.desc strong { color: var(--ink); font-weight: 500; }
+.says { margin: 2px 0 0; font-size: .88rem; font-style: italic; color: var(--moss); }
+.says b { font-style: normal; font-weight: 700; }
+.act { display: grid; gap: 8px; margin-top: auto; padding-top: 10px; }
+.add, .pick {
+  min-height: 44px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--wine);
+}
+.add { background: var(--wine); color: var(--wine-ink); }
+.pick { background: transparent; color: var(--wine); }
+.pick[aria-pressed="true"] { background: var(--wine); color: var(--wine-ink); }
+.add:hover, .pick:hover { filter: brightness(1.1); }
+.ask { font-size: .875rem; color: var(--muted); text-align: center; text-underline-offset: 3px; }
+.ask:hover { color: var(--ink); }
+.step { display: flex; align-items: center; justify-content: space-between; min-height: 44px; border: 1px solid var(--wine); border-radius: 6px; overflow: hidden; }
+.step button { width: 48px; align-self: stretch; background: transparent; border: 0; font-size: 1.3rem; cursor: pointer; color: var(--wine); }
+.step button:hover { background: var(--tile); }
+.step output { font-weight: 700; font-variant-numeric: tabular-nums; }
+.sub { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: var(--leaf); margin: 26px 0 0; }
+.sub small { font-family: var(--font-body); font-weight: 400; font-size: .9rem; color: var(--muted); margin-left: 8px; }
+
+/* Colores */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 10px; margin-top: 18px; }
+.sw { display: grid; gap: 6px; justify-items: center; background: none; border: 0; padding: 4px; cursor: pointer; font-size: .8rem; color: var(--ink); text-align: center; line-height: 1.2; }
+.sw i { display: block; width: 100%; aspect-ratio: 1 / 1; border-radius: 6px; border: 1px solid var(--line); background: var(--c); position: relative; }
+.sw[aria-pressed="true"] i { outline: 3px solid var(--wine); outline-offset: 2px; }
+.sw[aria-pressed="true"] i::after {
+  content: "✓";
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--wine);
+  color: var(--wine-ink);
+  display: grid;
+  place-items: center;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+/* Compra */
+.buy { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; margin-top: 18px; align-items: start; }
+.buy ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.buy li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; }
+.buy h3 { font-size: 1.05rem; font-weight: 700; font-family: var(--font-body); }
+.buy p, .buy ul { margin: 4px 0 0; color: var(--muted); font-size: .95rem; }
+.buy ul { padding-left: 1.1rem; display: grid; gap: 2px; }
+.buy b { color: var(--ink); font-weight: 700; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; min-width: 0; }
+.panel h3 { font-family: var(--font-display); font-size: 1.4rem; color: var(--wine); }
+.pay { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.pay:last-of-type { border-bottom: 0; }
+.pay div { min-width: 0; }
+.pay b { display: block; }
+.pay small { color: var(--muted); }
+.pay .n { font-variant-numeric: tabular-nums; font-weight: 500; user-select: all; }
+.copy { min-height: 38px; padding: 0 12px; background: transparent; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+.copy:hover { border-color: var(--leaf); }
+.foot { margin-top: 40px; padding-block: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.foot a { color: var(--ink); text-underline-offset: 3px; }
+.foot strong { color: var(--ink); font-weight: 500; user-select: all; }
+
+/* Barra del pedido */
+.cartbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -6px 20px var(--shadow);
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.cartbar .in { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.sum { display: grid; min-width: 0; flex: 1 1 200px; }
+.sum small { color: var(--muted); }
+.sum b { font-weight: 700; overflow-wrap: anywhere; }
+.open { min-height: 46px; padding: 0 20px; background: var(--wa); color: var(--wa-ink); border: 0; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+/* Hoja del pedido */
+.veil { position: fixed; inset: 0; z-index: 30; background: rgba(15, 5, 8, .6); }
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  max-width: 680px;
+  margin: 0 auto;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px 12px 0 0;
+  padding: 16px max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: grid;
+  gap: 14px;
+}
+.sheet header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheet h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--wine); }
+.x { width: 44px; height: 44px; background: transparent; border: 1px solid var(--line); border-radius: 6px; font-size: 1.1rem; cursor: pointer; }
+.res { display: grid; gap: 16px; }
+.res h3 { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+.row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+.row .t { flex: 1 1 170px; min-width: 0; }
+.row .t b { font-weight: 700; overflow-wrap: anywhere; }
+.row .t small { display: block; color: var(--muted); }
+.row .step { width: 132px; min-height: 40px; }
+.linkbtn { background: none; border: 0; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 40px; padding: 0 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px 0 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); cursor: pointer; }
+.chip i { width: 18px; height: 18px; border-radius: 50%; background: var(--c); border: 1px solid var(--line); }
+.hint { margin: 0; font-size: .85rem; color: var(--muted); }
+.empty { margin: 0; padding: 14px 0; color: var(--muted); text-align: center; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fields label { display: grid; gap: 4px; font-size: .85rem; color: var(--muted); min-width: 0; }
+.fields .wide { grid-column: 1 / -1; }
+.fields input, .fields select, .fields textarea { width: 100%; min-height: 44px; padding: 9px 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; color: var(--ink); }
+.fields textarea { min-height: 76px; resize: vertical; }
+.warn { color: var(--warn); font-size: .82rem; }
+.send { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; background: var(--wa); color: var(--wa-ink); border-radius: 6px; font-weight: 700; font-size: 1.05rem; text-decoration: none; }
+.send svg { width: 22px; height: 22px; }
+.send[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+.sheet .hint.c { text-align: center; }
+
+@media (max-width: 760px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero-copy { padding-block: 32px 8px; }
+  .hero-img { max-height: 340px; justify-self: center; }
+  .buy { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) { .fields { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: no-preference) { .card { transition: border-color .15s; } .card:hover { border-color: var(--leaf); } }
+</style>
+
+<header class="hero">
+  <div class="wrap gut">
+    <div class="hero-copy">
+      <span class="mark">Luciérnagas</span>
+      <h1>Catálogo <span>Flores</span></h1>
+      <p class="lead">Flores y ramos hechos a mano con limpiapipas. Armamos tu ramo con tus flores, follajes y colores favoritos. Elige, personaliza y envía tu pedido por WhatsApp.</p>
+      <div class="cta">
+        <a class="btn-wa" id="hero-wa" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.4-4.2A8.5 8.5 0 1 1 8.3 18.7L4 20Z"/><path d="M9 9.5c.3 2.6 2.4 4.6 5 5l1.2-1.3-1.9-1-.8.7a3.4 3.4 0 0 1-1.6-1.6l.7-.8-1-1.9L9 9.5Z"/></svg>
+          Escribir por WhatsApp
+        </a>
+        <a class="btn-ghost" href="#arreglos">Ver arreglos</a>
+      </div>
+    </div>
+    <img class="hero-img" src="img/portada.jpg" width="665" height="870" alt="Azucenas rojas y blancas con capullos, hechas con limpiapipas">
+  </div>
+</header>
+
+<nav class="nav" aria-label="Secciones del catálogo">
+  <div class="wrap gut">
+    <a href="#arreglos">Arreglos</a>
+    <a href="#flores">Flores</a>
+    <a href="#follajes">Follajes</a>
+    <a href="#colores">Colores</a>
+    <a href="#compra">Cómo comprar</a>
+  </div>
+</nav>
+
+<div class="gut">
+  <div class="wrap">
+    <div class="steps-box">
+      <h2>¿Cómo armar tu ramo? <span class="script">Paso a paso</span></h2>
+      <ol class="steps">
+        <li><span class="num">1</span><b>Elige tus flores</b><p>Girasoles, lirios, azucenas, gerberas, hortensias o tulipanes.</p></li>
+        <li><span class="num">2</span><b>Selecciona el follaje</b><p>Personaliza su tonalidad y la cantidad para dar volumen.</p></li>
+        <li><span class="num">3</span><b>Escoge las tonalidades</b><p>Desde tonos suaves y delicados hasta intensos y radiantes.</p></li>
+        <li><span class="num">4</span><b>Define la cantidad</b><p>Desde 1 o 2 flores hasta arreglos voluminosos.</p></li>
+        <li><span class="num">5</span><b>Detalles finales</b><p>Tarjeta con tu mensaje sin costo adicional. Según el producto, lleva envoltura de papel especial.</p></li>
+      </ol>
+      <p class="note">El color del papel de envoltura y del moño se asigna según la disponibilidad en inventario, buscando siempre la armonía con tus flores. Si prefieres no armarlo desde cero, elige un arreglo y te asesoramos por WhatsApp.</p>
+    </div>
+
+    <section class="blk" id="arreglos">
+      <div class="sh"><h2>Arreglos</h2><span class="script">Tamaños y estilos</span></div>
+      <p class="note" style="margin-top:0">Fotos de referencia. Personaliza los tipos de flor, follajes y colores en el arreglo de tu preferencia. Elige uno y súmale lo que quieras de las secciones de abajo.</p>
+      <div class="grid" id="g-arreglos"></div>
+    </section>
+
+    <section class="blk" id="flores">
+      <div class="sh"><h2>Flores</h2><span class="script">Elige las tuyas</span></div>
+      <p class="note" style="margin-top:0">Cada flor es 100% hecha a mano. Agrega las que quieras a tu ramo y escoge los colores más abajo. El valor final se confirma por WhatsApp según el arreglo.</p>
+      <div class="grid" id="g-flores"></div>
+    </section>
+
+    <section class="blk" id="follajes">
+      <div class="sh"><h2>Follajes</h2><span class="script">Tipo A y Tipo B</span></div>
+      <p class="note" style="margin-top:0">Los arreglos indican cuántos follajes de cada tipo incluyen. Puedes elegir cuáles prefieres.</p>
+      <h3 class="sub">Follajes Tipo A</h3>
+      <div class="grid sm" id="g-fa"></div>
+      <h3 class="sub">Follajes Tipo B</h3>
+      <div class="grid sm" id="g-fb"></div>
+    </section>
+
+    <section class="blk" id="colores">
+      <div class="sh"><h2>Colores</h2><span class="script">Limpiapipas</span></div>
+      <p class="note" style="margin-top:0">Toca los tonos que quieres en tu ramo. Los tonos pueden variar ligeramente según la disponibilidad, úsalos como guía de referencia. <span id="colcount" aria-live="polite"></span></p>
+      <div class="swatches" id="g-colores" role="group" aria-label="Colores de limpiapipas"></div>
+    </section>
+
+    <section class="blk" id="compra">
+      <div class="sh"><h2>Dinámica</h2><span class="script">de compra</span></div>
+      <div class="buy">
+        <ol>
+          <li><span class="num">1</span><div><h3>Explora y elige tu estilo</h3><p>Selecciona el ramo que más te guste o inspírate con una temática o personaje especial. Escríbenos con <b>mínimo 5 días de anticipación</b> para asesorarte, definir cada detalle y agendar tu pedido.</p></div></li>
+          <li><span class="num">2</span><div><h3>Confirmación y elaboración</h3><p>Agendamos tu pedido con un <b>anticipo del 50%</b>. Desde ahí comenzamos a elaborar tus flores y arreglos. Cuando esté listo, te enviamos fotos del resultado final antes de la entrega.</p></div></li>
+          <li><span class="num">3</span><div><h3>Personaliza tu mensaje</h3><p>Todos los arreglos incluyen <b>tarjeta de regalo sin costo adicional</b>. Compártenos tu dedicatoria o, si prefieres, dejamos el espacio en blanco para que la escribas a mano.</p></div></li>
+          <li><span class="num">4</span><div><h3>Confirma y paga</h3><p>Liquidamos el saldo restante y coordinamos la entrega.</p>
+            <ul>
+              <li><b>Entregas en Bogotá:</b> en estación de TransMilenio por $6.000 de lunes a viernes.</li>
+              <li>Envío por aplicación a cargo del cliente.</li>
+              <li>Punto de entrega gratuito de martes a jueves.</li>
+              <li><b>Envíos nacionales:</b> disponibles según tu ubicación, con valor a cargo del cliente.</li>
+            </ul></div></li>
+        </ol>
+        <div class="panel">
+          <h3>Medios de pago</h3>
+          <p class="hint" style="margin-top:6px">Confirma tu pedido por WhatsApp antes de pagar el anticipo.</p>
+          <div class="pay"><div><b>Nequi</b><small>Lizeth Duitama</small></div><span class="n" id="n1">3202647058</span><button class="copy" type="button" data-copy="n1">Copiar</button></div>
+          <div class="pay"><div><b>Daviplata</b><small>Diego Camilo Acosta</small></div><span class="n" id="n2">3213032798</span><button class="copy" type="button" data-copy="n2">Copiar</button></div>
+          <div class="pay"><div><b>Bre-B</b><small>Llave</small></div><span class="n" id="n3">3213032799</span><button class="copy" type="button" data-copy="n3">Copiar</button></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>Luciérnagas. Hecho a mano con dedicación.</span>
+      <span>WhatsApp <strong id="numtxt"></strong></span>
+      <span>Instagram <a id="ig" href="#" target="_blank" rel="noopener">@luciernarte</a></span>
+    </footer>
+  </div>
+</div>
+
+<div class="cartbar" id="cartbar" hidden>
+  <div class="in">
+    <div class="sum"><small>Tu pedido</small><b id="sumtxt"></b></div>
+    <button class="open" id="open" type="button" aria-haspopup="dialog">Ver pedido y enviar</button>
+  </div>
+</div>
+
+<div class="veil" id="veil" hidden></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
+  <header>
+    <h2 id="sheet-h">Tu pedido</h2>
+    <button class="x" id="close" type="button" aria-label="Cerrar pedido">✕</button>
+  </header>
+  <div class="res" id="res"></div>
+  <div class="fields">
+    <label for="f-nombre">Tu nombre<input id="f-nombre" type="text" autocomplete="name" placeholder="Nombre y apellido"></label>
+    <label for="f-fecha">Fecha en que lo necesitas<input id="f-fecha" type="date"><span class="warn" id="f-warn" hidden>Elige una fecha con al menos 5 días de anticipación.</span></label>
+    <label for="f-entrega">Cómo lo recibes
+      <select id="f-entrega">
+        <option value="">Elige una opción</option>
+        <option>Estación de TransMilenio en Bogotá ($6.000, lunes a viernes)</option>
+        <option>Punto de entrega gratuito en Bogotá (martes a jueves)</option>
+        <option>Envío por aplicación en Bogotá (a cargo del cliente)</option>
+        <option>Envío nacional (valor a cargo del cliente)</option>
+      </select>
+    </label>
+    <label for="f-ciudad">Ciudad o barrio<input id="f-ciudad" type="text" autocomplete="address-level2" placeholder="Por ejemplo, Chapinero, Bogotá"></label>
+    <label class="wide" for="f-dedic">Dedicatoria para la tarjeta (opcional)<textarea id="f-dedic" placeholder="Escríbela aquí o déjala en blanco para escribirla a mano"></textarea></label>
+    <label class="wide" for="f-nota">Nota para Luciérnagas (opcional)<textarea id="f-nota" placeholder="Ocasión, colores del atuendo o cualquier idea que quieras contarnos"></textarea></label>
+  </div>
+  <a class="send" id="send" href="#" target="_blank" rel="noopener" aria-disabled="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.4-4.2A8.5 8.5 0 1 1 8.3 18.7L4 20Z"/><path d="M9 9.5c.3 2.6 2.4 4.6 5 5l1.2-1.3-1.9-1-.8.7a3.4 3.4 0 0 1-1.6-1.6l.7-.8-1-1.9L9 9.5Z"/></svg>
+    Enviar pedido por WhatsApp
+  </a>
+  <p class="hint c">Se abrirá WhatsApp con tu pedido escrito. Solo falta presionar enviar. El pedido se agenda con un anticipo del 50%.</p>
+  <button class="linkbtn" id="clear" type="button" style="justify-self:center">Vaciar pedido</button>
+</section>
+
+<script>
+/* ============ CONFIGURACIÓN ============ */
+const NEGOCIO = 'Luciérnagas';
+const WHATSAPP = '573232318265'; /* 57 + número de 10 dígitos */
+const INSTAGRAM = 'luciernarte';
+const DIAS_ANTICIPACION = 5;
+
+const ARREGLOS = [
+  { id: 'detalle', img: 'detalle', nombre: 'Detalle', tipo: 'rango', min: 24000, max: 30000, desc: 'Contiene: empaque craft, 1 flor, 1 follaje Tipo A y 1 follaje Tipo B.' },
+  { id: 'ramo-pequeno', img: 'ramo-pequeno', nombre: 'Ramo pequeño', tipo: 'rango', min: 65000, max: 70000, desc: 'Contiene: base, 1 flor principal, 2 flores secundarias, 2 follajes Tipo A y 1 follaje Tipo B.' },
+  { id: 'ramo-mediano', img: 'ramo-mediano', nombre: 'Ramo mediano', tipo: 'rango', min: 85000, max: 90000, desc: 'Contiene: base, 3 flores principales, 2 flores secundarias, 2 follajes Tipo A y 1 follaje Tipo B.' },
+  { id: 'ramo-grande', img: 'ramo-grande', nombre: 'Ramo grande', tipo: 'rango', min: 115000, max: 125000, desc: 'Contiene: base, 7 flores secundarias, 3 follajes Tipo A y 3 follajes Tipo B.' },
+  { id: 'ramo-amarillo', img: 'ramo-amarillo', nombre: 'Ramo amarillo', tipo: 'desde', min: 65000, desc: 'Simbolizan alegría, vitalidad y afecto sincero. Diseños pensados para iluminar el día de esa persona especial con un recuerdo eterno.' },
+  { id: 'graduacion-base', img: 'graduacion-base', nombre: 'Ramo de graduación con base', tipo: 'desde', min: 115000, desc: 'Base estable que le permite mantenerse de pie por sí solo. Incluye tarjeta personalizada con tu mensaje de felicitación. Personalizamos la paleta de colores para que combine con tu atuendo.' },
+  { id: 'graduacion-bolso', img: 'graduacion-bolso', nombre: 'Ramo de graduación estilo bolso', tipo: 'desde', min: 85000, desc: 'Su diseño estilo bolso te permite llevarlo colgado con total comodidad durante tu ceremonia. Personalizamos la paleta de colores para que combine con tu atuendo.' },
+  { id: 'ramo-tulipanes', img: 'ramo-tulipanes', nombre: 'Ramo de tulipanes', tipo: 'desde', min: 115000, desc: 'Pensado para transmitir emociones sinceras en un detalle que jamás se marchita. Diséñalo con tulipán tradicional o tulipán pomposo.' },
+  { id: 'ramo-shrek', img: 'ramo-shrek', nombre: 'Ramo temático Shrek', tipo: 'fijo', min: 85000, desc: 'Un detalle único inspirado en tu personaje favorito. El valor varía según la complejidad del diseño. Si tienes otro personaje o temática en mente, cuéntanos tu idea.' }
+];
+
+const FLORES = [
+  { id: 'tulipan', img: 'tulipan', nombre: 'Tulipán', desc: 'Una flor delicada y encantadora, ideal para sorprender con un gesto lleno de color.', dice: 'Cariño, ternura y nuevos comienzos.' },
+  { id: 'tulipan-pomposo', img: 'tulipan-pomposo', nombre: 'Tulipán pomposo', desc: 'Apariencia más abundante y llamativa, destaca por su volumen y sus delicados detalles.', dice: 'Cariño sincero, admiración y el entusiasmo de un nuevo comienzo.' },
+  { id: 'azucena-unicolor', img: 'azucena-unicolor', nombre: 'Azucena unicolor', desc: 'La elegancia de una flor en un solo tono. Una pieza artesanal delicada y armoniosa.', dice: 'Admiración, pureza y buenos deseos.' },
+  { id: 'azucena-combinada', img: 'azucena-combinada', nombre: 'Azucena combinada', desc: 'Dos colores se encuentran para crear una flor llena de personalidad.', dice: 'Afecto, alegría y complicidad.' },
+  { id: 'lirio-hibrido', img: 'lirio-hibrido', nombre: 'Lirio híbrido', desc: 'Pétalos de color con bordes blancos que crean un contraste que no pasa desapercibido.', dice: 'Admiración y cariño.' },
+  { id: 'lirio-turco', img: 'lirio-turco', nombre: 'Lirio turco', desc: 'Flor de silueta singular, que destaca por la forma curva y original de sus pétalos.', dice: 'Originalidad, fascinación y aprecio.' },
+  { id: 'hortensia', img: 'hortensia', nombre: 'Hortensia', desc: 'Un pequeño conjunto de flores que se unen para crear una pieza abundante, tierna y llena de encanto.', dice: 'Gratitud, comprensión y aprecio sincero.' },
+  { id: 'gerbera', img: 'gerbera', nombre: 'Gerbera', desc: 'Alegre, colorida y llena de vida, con numerosos pétalos y forma radiante.', dice: 'Felicidad, entusiasmo y pureza de corazón.' },
+  { id: 'girasol-grande', img: 'girasol-grande', nombre: 'Girasoles grandes', desc: 'Una flor que transmite alegría desde el primer vistazo, con tamaño protagonista y pétalos radiantes.', dice: 'Admiración, optimismo y apoyo incondicional.' },
+  { id: 'girasol-pequeno', img: 'girasol-pequeno', nombre: 'Girasoles pequeños', desc: 'Pequeño en tamaño, enorme en alegría. Perfecto para dar un toque de luz o decorar un rincón.', dice: 'Amistad, entusiasmo y buenos deseos.' }
+];
+
+const FOLLAJES = [
+  { id: 'espiral', img: 'espiral', nombre: 'Espiral', tipo: 'A' },
+  { id: 'onda', img: 'onda', nombre: 'Onda', tipo: 'A' },
+  { id: 'lavanda', img: 'lavanda', nombre: 'Lavanda', tipo: 'A' },
+  { id: 'pasto', img: 'pasto', nombre: 'Pasto', tipo: 'A' },
+  { id: 'flor', img: 'flor', nombre: 'Flor', tipo: 'B' },
+  { id: 'nubes', img: 'nubes', nombre: 'Nubes', tipo: 'B' },
+  { id: 'eucalipto', img: 'eucalipto', nombre: 'Eucalipto', tipo: 'B' },
+  { id: 'rama', img: 'rama', nombre: 'Rama', tipo: 'B' }
+];
+
+/* Colores tomados de la paleta del catálogo. Los nombres son referenciales. */
+const COLORES = [
+  ['Verde pino', '#0C2718'], ['Verde musgo', '#192E0E'], ['Verde oliva', '#495A19'], ['Verde limón', '#5B810E'], ['Verde manzana', '#6B9334'], ['Verde esmeralda', '#0E5B20'],
+  ['Verde menta', '#76BB77'], ['Aguamarina', '#67ADA3'], ['Turquesa', '#17738B'], ['Azul cielo', '#4B95BC'], ['Azul hielo', '#ACBFD2'], ['Lila', '#A27DB0'],
+  ['Lavanda', '#785D94'], ['Morado', '#810F87'], ['Rojo', '#7B0F19'], ['Rosa fucsia', '#DD4666'], ['Malva', '#965460'], ['Rosa claro', '#DA7D84'],
+  ['Vinotinto', '#53131E'], ['Café oscuro', '#281208'], ['Café rojizo', '#66210D'], ['Caramelo', '#B07235'], ['Arena', '#B99163'], ['Blanco', '#DFDEE3'],
+  ['Naranja', '#B93A0A'], ['Mostaza', '#BE7D0D'], ['Amarillo', '#C99F1B'], ['Crema', '#E2DBB2']
+];
+/* ======================================= */
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = (n) => '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+const waLink = (t) => 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(t);
+const find = (arr, id) => arr.find((x) => x.id === id) || null;
+
+function precioTxt(a) {
+  if (a.tipo === 'rango') return money(a.min) + ' a ' + money(a.max);
+  if (a.tipo === 'desde') return 'Desde ' + money(a.min);
+  return money(a.min);
+}
+function anticipoTxt(a) {
+  if (a.tipo === 'rango') return money(a.min / 2) + ' a ' + money(a.max / 2);
+  if (a.tipo === 'desde') return 'desde ' + money(a.min / 2);
+  return money(a.min / 2);
+}
+
+/* Estado */
+const S = { arreglo: null, flores: {}, follajes: {}, colores: [], campos: {} };
+const CAMPOS = ['f-nombre', 'f-fecha', 'f-entrega', 'f-ciudad', 'f-dedic', 'f-nota'];
+try {
+  const g = JSON.parse(localStorage.getItem('luciernagas-pedido') || '{}');
+  if (g.arreglo && find(ARREGLOS, g.arreglo)) S.arreglo = g.arreglo;
+  Object.keys(g.flores || {}).forEach((k) => { if (find(FLORES, k) && g.flores[k] > 0) S.flores[k] = Math.min(99, g.flores[k] | 0); });
+  Object.keys(g.follajes || {}).forEach((k) => { if (find(FOLLAJES, k) && g.follajes[k] > 0) S.follajes[k] = Math.min(99, g.follajes[k] | 0); });
+  (g.colores || []).forEach((n) => { if (COLORES.some((c) => c[0] === n)) S.colores.push(n); });
+  S.campos = g.campos || {};
+} catch (e) { /* sin almacenamiento */ }
+function guardar() { try { localStorage.setItem('luciernagas-pedido', JSON.stringify(S)); } catch (e) { /* sin almacenamiento */ } }
+
+/* Tarjetas */
+const waIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.4-4.2A8.5 8.5 0 1 1 8.3 18.7L4 20Z"/><path d="M9 9.5c.3 2.6 2.4 4.6 5 5l1.2-1.3-1.9-1-.8.7a3.4 3.4 0 0 1-1.6-1.6l.7-.8-1-1.9L9 9.5Z"/></svg>';
+
+function arregloAct(a) {
+  const on = S.arreglo === a.id;
+  const msg = 'Hola ' + NEGOCIO + ', me interesa el ' + a.nombre + ' (' + precioTxt(a) + '). ¿Me cuentan cómo lo personalizamos?';
+  return '<button class="pick" type="button" data-pick="' + a.id + '" aria-pressed="' + on + '">' + (on ? '✓ Arreglo elegido' : 'Elegir este arreglo') + '</button>' +
+    '<a class="ask" href="' + waLink(msg) + '" target="_blank" rel="noopener">Preguntar por WhatsApp</a>';
+}
+function arregloCard(a) {
+  return '<article class="card' + (S.arreglo === a.id ? ' on' : '') + '" id="card-' + a.id + '">' +
+    '<img class="photo" src="img/' + a.img + '.jpg" width="720" height="720" loading="lazy" alt="' + esc(a.nombre) + ' hecho con limpiapipas">' +
+    '<div class="body"><h3 class="name">' + esc(a.nombre) + '</h3><span class="price">' + precioTxt(a) + '</span>' +
+    '<p class="desc">' + esc(a.desc) + '</p><div class="act">' + arregloAct(a) + '</div></div></article>';
+}
+
+function qtyAct(kind, id) {
+  const q = (kind === 'f' ? S.flores : S.follajes)[id] || 0;
+  const nombre = esc((kind === 'f' ? find(FLORES, id) : find(FOLLAJES, id)).nombre);
+  return q
+    ? '<div class="step"><button type="button" data-dec="' + kind + ':' + id + '" aria-label="Quitar uno: ' + nombre + '">−</button><output aria-live="polite">' + q + ' en tu ramo</output><button type="button" data-inc="' + kind + ':' + id + '" aria-label="Agregar uno más: ' + nombre + '">+</button></div>'
+    : '<button class="add" type="button" data-add="' + kind + ':' + id + '">Agregar al ramo</button>';
+}
+function floresCard(f) {
+  return '<article class="card" id="card-f-' + f.id + '">' +
+    '<img class="photo" src="img/' + f.img + '.jpg" width="720" height="720" loading="lazy" alt="' + esc(f.nombre) + ' hecho con limpiapipas">' +
+    '<div class="body"><h3 class="name">' + esc(f.nombre) + '</h3><p class="desc">' + esc(f.desc) + '</p>' +
+    '<p class="says"><b>¿Qué expresa?</b> ' + esc(f.dice) + '</p><div class="act">' + qtyAct('f', f.id) + '</div></div></article>';
+}
+function follajeCard(f) {
+  return '<article class="card" id="card-g-' + f.id + '">' +
+    '<img class="photo" src="img/' + f.img + '.jpg" width="720" height="720" loading="lazy" alt="Follaje ' + esc(f.nombre) + ' Tipo ' + f.tipo + '">' +
+    '<div class="body"><h3 class="name">' + esc(f.nombre) + '</h3><div class="act">' + qtyAct('g', f.id) + '</div></div></article>';
+}
+function colorBtn(c) {
+  const on = S.colores.indexOf(c[0]) !== -1;
+  return '<button class="sw" type="button" data-color="' + esc(c[0]) + '" aria-pressed="' + on + '"><i style="--c:' + c[1] + '"></i>' + esc(c[0]) + '</button>';
+}
+
+function renderTodo() {
+  $('g-arreglos').innerHTML = ARREGLOS.map(arregloCard).join('');
+  $('g-flores').innerHTML = FLORES.map(floresCard).join('');
+  $('g-fa').innerHTML = FOLLAJES.filter((f) => f.tipo === 'A').map(follajeCard).join('');
+  $('g-fb').innerHTML = FOLLAJES.filter((f) => f.tipo === 'B').map(follajeCard).join('');
+  $('g-colores').innerHTML = COLORES.map(colorBtn).join('');
+  contarColores();
+}
+
+function contarColores() {
+  const n = S.colores.length;
+  $('colcount').textContent = n ? n + (n === 1 ? ' color elegido.' : ' colores elegidos.') : '';
+}
+
+/* Cambios de estado */
+function sumas() {
+  const sum = (o) => Object.keys(o).reduce((t, k) => t + o[k], 0);
+  return { f: sum(S.flores), g: sum(S.follajes), c: S.colores.length };
+}
+function barra() {
+  const s = sumas();
+  const hay = S.arreglo || s.f || s.g || s.c;
+  $('cartbar').hidden = !hay;
+  const partes = [];
+  const a = find(ARREGLOS, S.arreglo);
+  partes.push(a ? a.nombre : 'Ramo a tu gusto');
+  if (s.f) partes.push(s.f + (s.f === 1 ? ' flor' : ' flores'));
+  if (s.g) partes.push(s.g + (s.g === 1 ? ' follaje' : ' follajes'));
+  if (s.c) partes.push(s.c + (s.c === 1 ? ' color' : ' colores'));
+  $('sumtxt').textContent = partes.join(' · ');
+}
+function refrescarAct(kind, id) {
+  const card = $('card-' + kind + '-' + id);
+  if (!card) return;
+  const act = card.querySelector('.act');
+  const tenia = act.contains(document.activeElement);
+  act.innerHTML = qtyAct(kind, id);
+  if (tenia) { const b = act.querySelector('[data-inc],[data-add]'); if (b) b.focus(); }
+}
+function setQty(kind, id, q) {
+  const mapa = kind === 'f' ? S.flores : S.follajes;
+  q = Math.max(0, Math.min(99, q));
+  if (q === 0) delete mapa[id]; else mapa[id] = q;
+  guardar();
+  refrescarAct(kind, id);
+  barra();
+  if (!$('sheet').hidden) renderSheet();
+}
+function elegirArreglo(id) {
+  const previo = S.arreglo;
+  S.arreglo = previo === id ? null : id;
+  guardar();
+  [previo, S.arreglo].forEach((x) => {
+    if (!x) return;
+    const a = find(ARREGLOS, x);
+    const card = $('card-' + x);
+    if (!card) return;
+    card.classList.toggle('on', S.arreglo === x);
+    const act = card.querySelector('.act');
+    const tenia = act.contains(document.activeElement);
+    act.innerHTML = arregloAct(a);
+    if (tenia) act.querySelector('.pick').focus();
+  });
+  barra();
+  if (!$('sheet').hidden) renderSheet();
+}
+function alternarColor(nombre) {
+  const i = S.colores.indexOf(nombre);
+  if (i === -1) S.colores.push(nombre); else S.colores.splice(i, 1);
+  guardar();
+  document.querySelectorAll('.sw').forEach((b) => { if (b.dataset.color === nombre) b.setAttribute('aria-pressed', String(i === -1)); });
+  contarColores();
+  barra();
+  if (!$('sheet').hidden) renderSheet();
+}
+
+/* Mensaje de WhatsApp */
+function fechaLarga(v) {
+  const p = v.split('-');
+  if (p.length !== 3) return v;
+  const d = new Date(+p[0], +p[1] - 1, +p[2]);
+  try { return d.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }); } catch (e) { return v; }
+}
+function mensaje() {
+  const a = find(ARREGLOS, S.arreglo);
+  let m = 'Hola ' + NEGOCIO + ', quiero hacer un pedido:\n\n';
+  m += a ? 'Arreglo: ' + a.nombre + ' (valor de referencia: ' + precioTxt(a) + ')' : 'Arreglo: quiero armar mi ramo a mi gusto';
+  const fl = Object.keys(S.flores).map((k) => '• ' + S.flores[k] + ' x ' + find(FLORES, k).nombre);
+  if (fl.length) m += '\n\nFlores:\n' + fl.join('\n');
+  const fo = Object.keys(S.follajes).map((k) => { const f = find(FOLLAJES, k); return '• ' + S.follajes[k] + ' x ' + f.nombre + ' (Tipo ' + f.tipo + ')'; });
+  if (fo.length) m += '\n\nFollajes:\n' + fo.join('\n');
+  if (S.colores.length) m += '\n\nColores: ' + S.colores.join(', ');
+  const v = (id) => $(id).value.trim();
+  const extra = [];
+  if (v('f-entrega')) extra.push('Entrega: ' + v('f-entrega'));
+  if (v('f-fecha')) extra.push('Fecha en que lo necesito: ' + fechaLarga(v('f-fecha')));
+  if (v('f-ciudad')) extra.push('Ciudad o barrio: ' + v('f-ciudad'));
+  if (v('f-nombre')) extra.push('Nombre: ' + v('f-nombre'));
+  if (v('f-dedic')) extra.push('Dedicatoria para la tarjeta: ' + v('f-dedic'));
+  if (v('f-nota')) extra.push('Nota: ' + v('f-nota'));
+  if (extra.length) m += '\n\n' + extra.join('\n');
+  m += '\n\n¿Me ayudan a confirmar disponibilidad y valor final? Entiendo que el pedido se agenda con un anticipo del 50%.';
+  return m;
+}
+
+/* Hoja del pedido */
+function filaItem(kind, id, nombre, q, sub) {
+  return '<div class="row"><div class="t"><b>' + esc(nombre) + '</b>' + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</div>' +
+    '<div class="step"><button type="button" data-dec="' + kind + ':' + id + '" aria-label="Quitar uno: ' + esc(nombre) + '">−</button><output>' + q + '</output><button type="button" data-inc="' + kind + ':' + id + '" aria-label="Agregar uno más: ' + esc(nombre) + '">+</button></div></div>';
+}
+function renderSheet() {
+  const a = find(ARREGLOS, S.arreglo);
+  const fl = Object.keys(S.flores);
+  const fo = Object.keys(S.follajes);
+  const hay = a || fl.length || fo.length || S.colores.length;
+  let h = '';
+  if (!hay) {
+    h = '<p class="empty">Tu pedido está vacío. Cierra esta ventana, elige un arreglo o agrega flores del catálogo.</p>';
+  } else {
+    h += '<div><h3>Arreglo</h3>';
+    if (a) {
+      h += '<div class="row"><div class="t"><b>' + esc(a.nombre) + '</b><small>Valor de referencia: ' + precioTxt(a) + '. Anticipo del 50%: ' + anticipoTxt(a) + '.</small></div><button class="linkbtn" type="button" data-quitar-arreglo="1">Quitar</button></div>';
+    } else {
+      h += '<p class="hint">Sin arreglo elegido. Armamos tu ramo a tu gusto y te asesoramos por WhatsApp.</p>';
+    }
+    h += '</div>';
+    if (fl.length) h += '<div><h3>Flores</h3>' + fl.map((k) => filaItem('f', k, find(FLORES, k).nombre, S.flores[k])).join('') + '</div>';
+    if (fo.length) h += '<div><h3>Follajes</h3>' + fo.map((k) => { const f = find(FOLLAJES, k); return filaItem('g', k, f.nombre, S.follajes[k], 'Tipo ' + f.tipo); }).join('') + '</div>';
+    if (S.colores.length) {
+      h += '<div><h3>Colores</h3><div class="chips">' + S.colores.map((n) => {
+        const c = COLORES.find((x) => x[0] === n);
+        return '<button class="chip" type="button" data-color-del="' + esc(n) + '" aria-label="Quitar el color ' + esc(n) + '"><i style="--c:' + (c ? c[1] : '#999') + '"></i>' + esc(n) + ' ✕</button>';
+      }).join('') + '</div></div>';
+    }
+  }
+  $('res').innerHTML = h;
+  const send = $('send');
+  if (hay) { send.href = waLink(mensaje()); send.setAttribute('aria-disabled', 'false'); }
+  else { send.setAttribute('href', '#'); send.setAttribute('aria-disabled', 'true'); }
+}
+function abrirHoja() { renderSheet(); $('veil').hidden = false; $('sheet').hidden = false; $('close').focus(); }
+function cerrarHoja() { $('veil').hidden = true; $('sheet').hidden = true; $('open').focus(); }
+
+/* Eventos */
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  const d = b.dataset;
+  const par = (s) => s.split(':');
+  if (d.pick) elegirArreglo(d.pick);
+  else if (d.add) { const [k, id] = par(d.add); setQty(k, id, 1); }
+  else if (d.inc) { const [k, id] = par(d.inc); setQty(k, id, ((k === 'f' ? S.flores : S.follajes)[id] || 0) + 1); }
+  else if (d.dec) { const [k, id] = par(d.dec); setQty(k, id, ((k === 'f' ? S.flores : S.follajes)[id] || 0) - 1); }
+  else if (d.color) alternarColor(d.color);
+  else if (d.colorDel) alternarColor(d.colorDel);
+  else if (d.quitarArreglo) elegirArreglo(S.arreglo);
+  else if (d.copy) copiar(d.copy, b);
+});
+function copiar(id, btn) {
+  const el = $(id);
+  const texto = el.textContent.trim();
+  const listo = () => { const t = btn.textContent; btn.textContent = 'Copiado'; setTimeout(() => { btn.textContent = t; }, 1600); };
+  const sel = () => { const r = document.createRange(); r.selectNodeContents(el); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try {
+    navigator.clipboard.writeText(texto).then(listo, sel);
+  } catch (err) { sel(); }
+}
+$('open').addEventListener('click', abrirHoja);
+$('close').addEventListener('click', cerrarHoja);
+$('veil').addEventListener('click', cerrarHoja);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('sheet').hidden) cerrarHoja(); });
+$('clear').addEventListener('click', () => {
+  S.arreglo = null; S.flores = {}; S.follajes = {}; S.colores = [];
+  guardar(); renderTodo(); barra(); renderSheet();
+});
+
+/* Campos del formulario */
+function fechaMinima() {
+  const d = new Date();
+  d.setDate(d.getDate() + DIAS_ANTICIPACION);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+const minFecha = fechaMinima();
+$('f-fecha').min = minFecha;
+CAMPOS.forEach((id) => {
+  if (S.campos[id]) $(id).value = S.campos[id];
+  $(id).addEventListener('input', () => {
+    S.campos[id] = $(id).value;
+    if (id === 'f-fecha') $('f-warn').hidden = !($(id).value && $(id).value < minFecha);
+    guardar();
+    renderSheet();
+  });
+});
+$('f-warn').hidden = !($('f-fecha').value && $('f-fecha').value < minFecha);
+
+/* Arranque */
+$('hero-wa').href = waLink('Hola ' + NEGOCIO + ', vi su catálogo de flores y quiero hacer un pedido.');
+$('numtxt').textContent = '+' + WHATSAPP.slice(0, 2) + ' ' + WHATSAPP.slice(2, 5) + ' ' + WHATSAPP.slice(5, 8) + ' ' + WHATSAPP.slice(8);
+$('ig').href = 'https://instagram.com/' + INSTAGRAM;
+renderTodo();
+barra();
+</script>
